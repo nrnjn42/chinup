@@ -218,13 +218,13 @@ final class NotificationManager: ObservableObject {
 
     // MARK: - Pause Notifications
 
-    /// Sends notification when pause timer expires
+    /// Sends notification when a timed pause ends and monitoring resumes on its own
     func sendPauseExpiredNotification() {
         guard isAuthorized else { return }
 
         let content = UNMutableNotificationContent()
-        content.title = "Session Paused"
-        content.body = "Your pause timer has expired. Would you like to continue?"
+        content.title = "Monitoring Resumed"
+        content.body = "Your pause has ended. ChinUp is watching your posture again."
         content.sound = .default
         content.categoryIdentifier = "PAUSE_EXPIRED"
 

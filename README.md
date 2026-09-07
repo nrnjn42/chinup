@@ -42,7 +42,7 @@ you.
 
 - macOS 15.0 or later
 - AirPods Pro (1st generation or later), or any AirPods with motion sensors
-- Xcode 16+ with Swift 6.1 to build from source
+- Xcode 16 or later to build from source (the project compiles in Swift 5 language mode)
 
 ## Building
 

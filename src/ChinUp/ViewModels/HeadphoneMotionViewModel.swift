@@ -39,7 +39,6 @@ class HeadphoneMotionViewModel: ObservableObject {
     // Pause state
     private var pauseTimer: Timer?
     private var pauseEndTime: Date?
-    private var pauseDurationSeconds: TimeInterval = 0
     private var accumulatedSessionDuration: TimeInterval = 0 // Session time before pause
     private var lastActiveTime: Date? // Last time session was active
 
@@ -236,7 +235,6 @@ class HeadphoneMotionViewModel: ObservableObject {
         lastActiveTime = Date()
 
         sessionState = reason
-        pauseDurationSeconds = duration ?? 0
 
         // Finalize any accumulated poor posture time before pausing
         // This prevents the pause duration from being incorrectly added to poor posture time
@@ -313,12 +311,10 @@ class HeadphoneMotionViewModel: ObservableObject {
         let remaining = endTime.timeIntervalSince(Date())
 
         if remaining <= 0 {
-            // Pause expired - extend by same duration
-            Logging.log("⏰ [PAUSE] Timer expired, extending by \(pauseDurationSeconds)s")
-            pauseEndTime = Date().addingTimeInterval(pauseDurationSeconds)
-            pauseRemainingSeconds = pauseDurationSeconds
-
-            // Send notification to user asking if they want to continue
+            Logging.log("⏰ [PAUSE] Timer expired - AUTO-RESUMING session")
+            // resumeSession() invalidates the timer and clears pauseEndTime, so
+            // this branch cannot fire again.
+            resumeSession()
             sendPauseExpiredNotification()
         } else {
             pauseRemainingSeconds = remaining
