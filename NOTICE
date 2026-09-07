@@ -1,0 +1,47 @@
+ChinUp
+======
+
+This project is a derivative work of WorkWell.
+
+    Original project : WorkWell
+    Original author  : Nayan Kumar (https://github.com/wizenheimer)
+    Original source  : https://github.com/wizenheimer/workwell
+    Original license : MIT (as declared in the upstream README)
+
+ChinUp began as a fork of WorkWell and retains a substantial portion of the
+original source. Both the original copyright and the modification copyright
+are recorded in the LICENSE file, as MIT requires.
+
+
+What changed in ChinUp
+----------------------
+
+WorkWell is an iOS application. ChinUp retargets it to macOS via Mac Catalyst
+and reworks its behaviour. The significant differences:
+
+  * Platform      Retargeted from iOS-only to macOS 15+ (Mac Catalyst),
+                  including a floating desktop status widget and
+                  Catalyst-specific audio, notification and lifecycle paths.
+
+  * Thresholds    Replaced the single forward-tilt threshold with independent
+                  lower and upper bounds, so both chin-down and chin-up
+                  posture are detected, with a graduated warning zone between.
+
+  * Reliability   Added AirPods removal and disconnection detection, with
+                  configurable auto-pause and auto-resume, so alerts are no
+                  longer emitted when the device is not being worn.
+
+  * Correctness   Fixed the poor-posture percentage calculation.
+
+  * Performance   Reduced CPU usage substantially: motion is polled on an
+                  interval rather than driven by continuous callbacks, UI
+                  state updates are suppressed while the window is not
+                  visible, and background animations are opt-in.
+
+  * Diagnostics   Added file-based logging.
+
+  * Interface     Simplified the UI and removed unused controls.
+
+Assets, application icon and documentation in this repository are original to
+ChinUp. Screenshots and media belonging to the upstream project are not
+included here.
